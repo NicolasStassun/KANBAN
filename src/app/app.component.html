@@ -1,8 +1,14 @@
 <html class="h-screen w-screen">
 
-    <div class="bg-slate-500 h-1/6 w-screen">
+    <div class="bg-slate-500 h-1/6 w-screen flex justify-around items-center border-b-2 border-black">
 
-      asdasd
+      <button class="rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12" routerLink="/tarefas">Tarefas</button>
+      <button class="rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12" routerLink="/categoria">Categorias</button>
+
+    </div>
+    <div class="bg-slate-100 h-5/6 w-screen">
+
+      <router-outlet></router-outlet>
 
     </div>
 
