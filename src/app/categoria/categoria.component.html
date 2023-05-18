@@ -1,13 +1,17 @@
-<div class="bg-slate-100 h-full w-screen flex justify-center ">
-
+<div style="flex-direction: column;" class="bg-slate-100 h-full w-screen flex items-center">
     <div class="h-1/6 w-2/6 bg-white rounded border-2 border-black mt-4 flex flex-wrap justify-center content-around">
-
-        <input class="mt-1 mb-px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
-               placeholder="Categoria"
-               [(ngModel)]="novaCategoria"
-        >
-        <button class=" break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12" routerLink="/categoria">Cadastrar Categorias</button>
-
+      <input class="mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
+             placeholder="Categoria"
+             [(ngModel)]="novaCategoria"
+      >
+      <button class="break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12" (click)="cadastrarCategoria(novaCategoria)">Cadastrar Categorias</button>
     </div>
-
-</div>
+    <div class="flex items-center justify-around w-screen flex-wrap">
+    <div *ngFor="let nomeDaCategoria of categorias">
+      <div class="break-words rounded border-2 border-black bg-white mt-9 px-8 py-2 text-lg w-52 h-12">
+        <h1 class="text-center">{{ nomeDaCategoria }}</h1>
+      </div>
+    </div>
+    </div>  
+  </div>
+  
