@@ -8,19 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class CategoriaComponent implements OnInit {
 
   novaCategoria: string = "";
-  categorias: string[] = [];
+  categorias: string[] = ['TODO', 'DOING', 'DONE'];
 
   constructor() { }
 
   ngOnInit(): void {
+
     this.pegaCategoriaDoLocalStorage();
+
   }
 
-  cadastrarCategoria(categoria: string | null): void {
-    if (categoria !== null) {
-      this.categorias.push(categoria);
+  cadastrarCategoria(): void {
+    if (this.novaCategoria !== "") {
+      this.categorias.push(this.novaCategoria);
       this.enviaCategoriaParaLocalStorage();
-      console.log(categoria);
+      console.log(this.novaCategoria);
       this.novaCategoria = "";
     }
   }
@@ -35,4 +37,17 @@ export class CategoriaComponent implements OnInit {
   enviaCategoriaParaLocalStorage(): void {
     localStorage.setItem("listaDeCategorias", JSON.stringify(this.categorias));
   }
+
+  deletarCategoriaPadrao: boolean = false;
+
+  deletaCategoria(categoriaRm: string): void {
+
+    this.categorias.splice(this.categorias.indexOf(categoriaRm), 1);
+    
+    this.novaCategoria = "";
+    localStorage.setItem("listaDeCategorias", JSON.stringify(this.categorias));
+  }
+
+  
+
 }

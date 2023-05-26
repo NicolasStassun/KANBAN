@@ -1,0 +1,19 @@
+#tarefas{
+
+    height: auto;
+    width: auto;
+    min-height: 35vh;
+    min-width: 35vh;
+    border: solid rgb(218, 218, 195) 3px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Loew;
+    background-color: white;
+    font-size: 11;
+    justify-content: space-between;
+    word-break: break-word;
+
+    
+}

@@ -1,6 +1,53 @@
-<div class="bg-slate-100 h-full w-screen">
+<div style="flex-direction: column;" class="bg-slate-100 h-full w-screen flex items-center">
+    <div class="h-2/6 w-2/6 bg-white rounded border-2 border-black mt-4 flex flex-wrap justify-center content-around">
+        <input
+            class=" w-full mx-5 mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
+            placeholder="Nome" [(ngModel)]="tarefaModelo.nome">
+        <textarea class=" w-full mx-5" style="resize: none;" placeholder="Descricao"
+            [(ngModel)]="tarefaModelo.descricao"></textarea>
+        <select class="rounded border-2 border-black" [(ngModel)]="tarefaModelo.categoria">
+            <option *ngFor="let categoria of categorias" [attr.value]="categoria">{{categoria}}</option>
+        </select>
+        <button class="break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12"
+            (click)="cadastrarTarefa()">Cadastrar Categorias</button>
+    </div>
+
+    <div class="flex justify-around w-screen flex-wrap">
+
+        <div *ngFor="let nomeDaCategoria of categorias; index as indice">
+
+            <p class="text-center font-black text-4xl" style="height: auto;
+            width: auto;
+            min-width: 35vh;">{{nomeDaCategoria}}</p>
+
+            <div *ngFor="let tarefa of tarefas;index as indice">
+
+                <div *ngIf="nomeDaCategoria == tarefa.categoria">
+
+                    <div id="tarefas">
+
+                        <button style="border:0;align-self:end;background-color: transparent;justify-self: end;"
+                            (click)="deletaTarefa(indice)">X</button>
+                        <p>
+                            Tarefa: {{ tarefa.nome }}
+                        </p>
+                        <p>
+                            Descrição:{{ tarefa.descricao }}
+                        </p>
+                        <p>
+                            Categoria:{{ tarefa.categoria }}
+                        </p>
+                        <select [(ngModel)]="tarefa.categoria">
+                            <option *ngFor="let categoria of categorias" [attr.value]="categoria">{{categoria}}</option>
+                        </select>
+
+                    </div>
 
 
-    
+                </div>
 
+            </div>
+
+        </div>
+    </div>
 </div>
