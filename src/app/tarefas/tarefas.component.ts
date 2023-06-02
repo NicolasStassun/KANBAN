@@ -31,6 +31,8 @@ export class TarefasComponent implements OnInit {
 
   tarefas: Tarefa [] = [];
 
+  variavelArrastando: Tarefa = {nome: '', descricao: '', categoria: ''};
+
 
   ngOnInit(): void {
 
@@ -48,6 +50,8 @@ export class TarefasComponent implements OnInit {
       this.tarefas = JSON.parse(listaLocalStorageTarefa);
     }
   }
+
+  
 
   enviaTarefasParaLocalStorage(): void {
     localStorage.setItem("listaDeTarefas", JSON.stringify(this.tarefas));
@@ -71,6 +75,22 @@ export class TarefasComponent implements OnInit {
 
     this.tarefas.splice(indice,1);
     localStorage.setItem("listaDeTarefas",JSON.stringify(this.tarefas))
+  }
+
+
+  dropOver(categoria: string):void{
+
+    this.variavelArrastando.categoria = categoria
+    this.enviaTarefasParaLocalStorage();
+
+  }
+
+  
+
+  drag(tarefa: Tarefa){
+
+    this.variavelArrastando = tarefa;
+
   }
 
 }

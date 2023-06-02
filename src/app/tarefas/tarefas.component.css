@@ -3,7 +3,8 @@
     height: auto;
     width: auto;
     min-height: 35vh;
-    min-width: 35vh;
+    min-width: 20vw;
+    max-width: 20vw;
     border: solid rgb(218, 218, 195) 3px;
     border-radius: 8px;
     display: flex;
