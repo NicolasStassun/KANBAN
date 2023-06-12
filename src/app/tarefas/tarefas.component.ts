@@ -32,6 +32,9 @@ export class TarefasComponent implements OnInit {
   tarefas: Tarefa [] = [];
 
   variavelArrastando: Tarefa = {nome: '', descricao: '', categoria: ''};
+  categoriaDrop: string = '';
+  indexDrop: number = 0;
+
 
 
   ngOnInit(): void {
@@ -78,8 +81,8 @@ export class TarefasComponent implements OnInit {
   }
 
 
-  dropOver(categoria: string):void{
-
+  dropOver(categoria: string, event: Event):void{
+    event.preventDefault();
     this.variavelArrastando.categoria = categoria
     this.enviaTarefasParaLocalStorage();
 
@@ -92,6 +95,21 @@ export class TarefasComponent implements OnInit {
     this.variavelArrastando = tarefa;
 
   }
+
+  getIndex (event: Event, index: number): void {
+    event.preventDefault();
+    this.indexDrop = index;
+  }
+
+  drop(event: Event): void {
+    event.preventDefault();
+    this.tarefas.splice(this.tarefas.indexOf(this.variavelArrastando), 1);
+    this.tarefas.splice(this.indexDrop, 0, this.variavelArrastando);
+    this.enviaTarefasParaLocalStorage;
+
+  }
+
+
 
 }
 

@@ -14,17 +14,19 @@
 
     <div class="flex justify-around w-screen flex-wrap">
 
-        <div id="coluna" *ngFor="let nomeDaCategoria of categorias; index as indice" (dragover)="dropOver(nomeDaCategoria)">
+        <div id="coluna" *ngFor="let nomeDaCategoria of categorias; index as indice" 
+        (dragover)="dropOver(nomeDaCategoria, $event)"
+        (drop)="drop($event)">
 
             <p class="text-center font-black text-4xl" style="height: auto;
             width: auto;
             min-width: 35vh;">{{nomeDaCategoria}}</p>
 
-            <div *ngFor="let tarefa of tarefas;index as indice">
+            <div *ngFor="let tarefa of tarefas;index as index">
 
                 <div *ngIf="nomeDaCategoria == tarefa.categoria" >
 
-                    <div draggable="true" (dragstart)="drag(tarefa)" id="tarefas">
+                    <div draggable="true" (dragstart)="drag(tarefa)" (drop)="getIndex($event, index)" id="tarefas">
 
                         <button style="border:0;align-self:end;background-color: transparent;justify-self: end;"
                             (click)="deletaTarefa(indice)">X</button>
