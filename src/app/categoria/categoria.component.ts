@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Propriedade{
+
+  nome:string,
+  tipo: string,
+  items?: string[]
+
+}
+
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
@@ -7,45 +15,71 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriaComponent implements OnInit {
 
-  novaCategoria: string = "";
-  categorias: string[] = ['TODO', 'DOING', 'DONE'];
+  item:string = "";
+  itemPropriedadeExistente:string = "";
+
+  propriedadeModelo: Propriedade = { 
+      nome: "",
+      tipo: "",
+      items: []
+ };
+
+  propriedades : Propriedade[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
 
-    this.pegaCategoriaDoLocalStorage();
+    this.pegaPropriedadesDoLocalStorage();
 
   }
 
-  cadastrarCategoria(): void {
-    if (this.novaCategoria !== "") {
-      this.categorias.push(this.novaCategoria);
-      this.enviaCategoriaParaLocalStorage();
-      console.log(this.novaCategoria);
-      this.novaCategoria = "";
+  adicionariItemPropriedadeExistente(propriedade: Propriedade): void{
+
+    propriedade.items?.push(this.itemPropriedadeExistente)
+    this.itemPropriedadeExistente = ""
+
+  }
+
+  adicionariItem(): void{
+
+    this.propriedadeModelo.items?.push(this.item)
+    this.item = ""
+
+  }
+
+  cadastrarPropriedade(): void {
+    if (this.propriedadeModelo.nome !== "") {
+
+      const novaPropriedade: Propriedade = {
+        nome: this.propriedadeModelo.nome,
+        tipo: this.propriedadeModelo.tipo,
+        items: this.propriedadeModelo.items,
+      };
+
+      if(novaPropriedade.tipo != "Select"){
+
+        novaPropriedade.items = [];
+
+      }
+
+      this.propriedades.push(novaPropriedade);
+      this.enviaPropriedadeParaLocalStorage();
+      this.propriedadeModelo.nome = "";
+      this.propriedadeModelo.tipo = "";
+      this.propriedadeModelo.items = [];
     }
   }
 
-  pegaCategoriaDoLocalStorage(): void {
-    const listaLocalStorageCategoria = localStorage.getItem('listaDeCategorias');
-    if (listaLocalStorageCategoria !== null) {
-      this.categorias = JSON.parse(listaLocalStorageCategoria);
+  pegaPropriedadesDoLocalStorage(): void {
+    const listaLocalStoragePropriedade = localStorage.getItem('listaDePropriedade');
+    if (listaLocalStoragePropriedade !== null) {
+      this.propriedades = JSON.parse(listaLocalStoragePropriedade);
     }
   }
 
-  enviaCategoriaParaLocalStorage(): void {
-    localStorage.setItem("listaDeCategorias", JSON.stringify(this.categorias));
-  }
-
-  deletarCategoriaPadrao: boolean = false;
-
-  deletaCategoria(categoriaRm: string): void {
-
-    this.categorias.splice(this.categorias.indexOf(categoriaRm), 1);
-    
-    this.novaCategoria = "";
-    localStorage.setItem("listaDeCategorias", JSON.stringify(this.categorias));
+  enviaPropriedadeParaLocalStorage(): void {
+    localStorage.setItem("listaDePropriedade", JSON.stringify(this.propriedades));
   }
 
   

@@ -1,17 +1,60 @@
 <div style="flex-direction: column;" class="bg-slate-100 h-full w-screen flex items-center">
-    <div class="h-1/6 w-2/6 bg-white rounded border-2 border-black mt-4 flex flex-wrap justify-center content-around">
-      <input class="mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
-             placeholder="Categoria"
-             [(ngModel)]="novaCategoria">
-      <button (click)="cadastrarCategoria()">Cadastrar</button>
-    </div>
-    <div class="flex items-center justify-around w-screen flex-wrap">
-    <div *ngFor="let nomeDaCategoria of categorias; index as indice">
-      <div class="break-words rounded border-2 border-black bg-white mt-9 px-8 py-2 text-lg w-52 h-auto">
-        <button (click)="deletaCategoria(nomeDaCategoria)" class="">╳</button>
-        <p class="text-center font-extrabold">{{ nomeDaCategoria }}</p>
+  <div style="max-height: auto;" class="h-1/6 w-2/6 bg-white rounded border-2 border-black mt-4 flex flex-wrap justify-center content-around">
+    <input
+      class="mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
+      placeholder="Nome" [(ngModel)]="propriedadeModelo.nome">
+    <select aria-placeholder="tipo" [(ngModel)]="propriedadeModelo.tipo">
+      <option>String</option>
+      <option>Number</option>
+      <option>Select</option>
+    </select>
+
+    
+
+    <div *ngIf="propriedadeModelo.tipo == 'Select'">
+      <div  class = "h-1/6 justify-center content-around" >
+      <input
+      class="mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
+      [(ngModel)] = "item"
+      >
+      <button (click)="adicionariItem()">Cadastrar</button>
+      <div *ngFor="let item of propriedadeModelo.items">
+
+        <p>{{item}}</p>
+
+      </div>
+
       </div>
     </div>
-    </div>  
+
+
+    <button 
+    class="break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12"
+    (click)="cadastrarPropriedade()">Cadastrar</button>
   </div>
-  
+  <div class="flex items-center justify-around w-screen flex-wrap">
+    <div *ngFor="let propriedade of propriedades; index as indice">
+      <div class="break-words rounded border-2 border-black bg-white mt-9 px-8 py-2 text-lg w-52 h-auto">
+        <p class="text-center font-extrabold">{{ propriedade.nome }}</p>
+        <p class="text-center font-extrabold">{{ propriedade.tipo }}</p>
+
+        <div *ngIf="propriedade.tipo == 'Select'">
+          <div  class = "h-1/6 justify-center content-around" >
+          <input
+          class="mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
+          [(ngModel)] = "item"
+          >
+          <button (click)="adicionariItemPropriedadeExistente(propriedade)">Cadastrar</button>
+          <div *ngFor="let item of propriedade.items">
+    
+            <p>{{item}}</p>
+    
+          </div>
+    
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

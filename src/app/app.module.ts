@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { UserRepository } from 'src/repositories/user.repository';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { CategoriaComponent } from './categoria/categoria.component';
     CommonModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    UserRepository
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

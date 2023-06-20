@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserRepository } from 'src/repositories/user.repository';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo';
+
+  userRepository: UserRepository;
+
+  constructor(
+    userReposiroty: UserRepository
+  ){
+    this.userRepository = userReposiroty
+    console.log(this.userRepository.getUsers())
+
+  }
+
+  
+
+  title = "";
 }

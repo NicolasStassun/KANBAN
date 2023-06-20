@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Propriedade{
+
+  nome:string,
+  tipo: string,
+  items?: string[]
+
+}
+
 interface Tarefa{
 
   nome: string;
-  descricao: string;
-  categoria: string;
+  propriedades: Propriedade[]
 
 }
 
@@ -22,16 +29,14 @@ export class TarefasComponent implements OnInit {
   tarefaModelo: Tarefa = {
 
     nome: '',
-    descricao:'',
-    categoria: ''
+    propriedades: [] 
 
   }
 
-  categorias:string [] = [];
+  propriedades: Propriedade [] = [];
 
   tarefas: Tarefa [] = [];
 
-  variavelArrastando: Tarefa = {nome: '', descricao: '', categoria: ''};
   categoriaDrop: string = '';
   indexDrop: number = 0;
 
@@ -44,9 +49,9 @@ export class TarefasComponent implements OnInit {
   }
 
   pegaDoLocalStorage(): void {
-    const listaLocalStorageCategoria = localStorage.getItem('listaDeCategorias');
-    if (listaLocalStorageCategoria !== null) {
-      this.categorias = JSON.parse(listaLocalStorageCategoria);
+    const listaLocalStoragePropriedade = localStorage.getItem('listaDePropriedade');
+    if (listaLocalStoragePropriedade !== null) {
+      this.propriedades = JSON.parse(listaLocalStoragePropriedade);
     }
     const listaLocalStorageTarefa = localStorage.getItem('listaDeTarefas');
     if (listaLocalStorageTarefa !== null) {
@@ -63,15 +68,13 @@ export class TarefasComponent implements OnInit {
   cadastrarTarefa():void{
     const novaTarefa: Tarefa = {
       nome: this.tarefaModelo.nome,
-      descricao: this.tarefaModelo.descricao,
-      categoria: this.tarefaModelo.categoria,
+      propriedades: this.tarefaModelo.propriedades
     };
     this.tarefas.push(novaTarefa);
     this.enviaTarefasParaLocalStorage();
 
     this.tarefaModelo.nome = '';
-    this.tarefaModelo.descricao = '';
-    this.tarefaModelo.categoria = '';
+    this.tarefaModelo.propriedades = []
 
   }
   deletaTarefa(indice: number):void{
@@ -81,33 +84,33 @@ export class TarefasComponent implements OnInit {
   }
 
 
-  dropOver(categoria: string, event: Event):void{
-    event.preventDefault();
-    this.variavelArrastando.categoria = categoria
-    this.enviaTarefasParaLocalStorage();
+  // dropOver(categoria: string, event: Event):void{
+  //   event.preventDefault();
+  //   this.variavelArrastando.categoria = categoria
+  //   this.enviaTarefasParaLocalStorage();
 
-  }
+  // }
 
   
 
-  drag(tarefa: Tarefa){
+  // drag(tarefa: Tarefa){
 
-    this.variavelArrastando = tarefa;
+  //   this.variavelArrastando = tarefa;
 
-  }
+  // }
 
   getIndex (event: Event, index: number): void {
     event.preventDefault();
     this.indexDrop = index;
   }
 
-  drop(event: Event): void {
-    event.preventDefault();
-    this.tarefas.splice(this.tarefas.indexOf(this.variavelArrastando), 1);
-    this.tarefas.splice(this.indexDrop, 0, this.variavelArrastando);
-    this.enviaTarefasParaLocalStorage;
+  // drop(event: Event): void {
+  //   event.preventDefault();
+  //   this.tarefas.splice(this.tarefas.indexOf(this.variavelArrastando), 1);
+  //   this.tarefas.splice(this.indexDrop, 0, this.variavelArrastando);
+  //   this.enviaTarefasParaLocalStorage;
 
-  }
+  // }
 
 
 
