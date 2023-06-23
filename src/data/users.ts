@@ -1,98 +1,64 @@
-import { User } from "src/models/users/user"
-
+import { User } from "src/models/users/user";
 export const users: User[] = [
 	{
-
 		"id": "joao.silva",
 		"name": "João da Silva",
 		"groups": [],
 		"cardPermissions": [
-			
 			"Add"
-			
 		],
 		"propertiesPermissions": [
-		
 			"Add"
-	
 		]
-		
 	},
-	
 	{
-
 		"id": "henrique.santos",
 		"name": "Henrique Santos",
 		"groups": [],
 		"cardPermissions": [
-			
 			"Edit"
-			
 		],
 		"propertiesPermissions": [
-		
 			"Edit"
-		
 		]
-		
 	},
-	
 	{
-
-		"id": "miguel.carlos",
-		"name": "Miguel Carlos",
+		"id": "igor.oliveira",
+		"name": "Igor Oliveira",
 		"groups": [],
 		"cardPermissions": [
-			
 			"Remove"
-			
 		],
 		"propertiesPermissions": [
-		
 			"Remove"
-		
 		]
-		
 	},
-
-{
-
+	{
 		"id": "igor.guimaraes",
 		"name": "Igor Guimaraes",
 		"groups": [],
 		"cardPermissions": [
-			
-			"Add",
-			"Edit"
-			
+			"MoveCard"
 		],
 		"propertiesPermissions": [
-		
 			"Add",
 			"Edit"
-		
 		]
-		
 	},
 	{
-
 		"id": "diogo.defante",
 		"name": "Diogo Defante",
 		"groups": [],
 		"cardPermissions": [
-			
 			"Add",
 			"Edit",
-			"Remove"
-			
+			"Remove",
+			"MoveCard"
 		],
 		"propertiesPermissions": [
-		
 			"Add",
 			"Edit",
 			"Remove"
-			]
-		
+		]
 	}
-
 ]

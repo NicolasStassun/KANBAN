@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/models/users/user';
 import { UserRepository } from 'src/repositories/user.repository';
 
 @Component({
@@ -7,18 +8,17 @@ import { UserRepository } from 'src/repositories/user.repository';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  userRepository: UserRepository;
+  title = 'teste-app';
 
   constructor(
-    userReposiroty: UserRepository
+    private userRepository: UserRepository
   ){
-    this.userRepository = userReposiroty
-    console.log(this.userRepository.getUsers())
 
+  userRepository.getUsers().subscribe({
+    next: (value) =>{
+      console.log(value)
+    }
+  })
   }
 
-  
-
-  title = "";
 }

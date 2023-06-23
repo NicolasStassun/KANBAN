@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { UserRepository } from 'src/repositories/user.repository';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from 'src/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { UserRepository } from 'src/repositories/user.repository';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
-    UserRepository
+    UserRepository,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
