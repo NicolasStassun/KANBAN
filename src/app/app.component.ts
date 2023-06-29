@@ -14,11 +14,6 @@ export class AppComponent {
     private userRepository: UserRepository
   ){
 
-  userRepository.getUsers().subscribe({
-    next: (value) =>{
-      console.log(value)
-    }
-  })
   }
 
 }

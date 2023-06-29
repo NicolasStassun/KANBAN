@@ -31,28 +31,40 @@ export class TarefasComponent implements OnInit {
 
   @Input() userTarefa!: User
 
-  private userId: string = 'diogo.defante';
-  private users: User[] = [];
+  userId: string = 'teste';
+  users: User[] = [];
   user!: User;
 
   constructor(
     private userRepository: UserRepository
   ) {
-    userRepository.getUsers().subscribe({
+    this.userRepository.getUsers().subscribe({
       next:(value)=>{
-        console.log(value)
+         this.users = value
+         console.log(this.users)
       }
     })
-    this.user = this.getUsuarioLogado();
-    console.log(this.user);
+    
+    console.log(this.user)
   }
+
+  ngOnInit(): void {
+    this.getUsuarioLogado();
+    this.pegaDoLocalStorage();
+
+  }
+
 
   
 
-  private getUsuarioLogado(): User {
-    return this.users.find((user) => {
-      return user.id === this.userId
-    }) as User;
+ getUsuarioLogado(): void {
+  console.log('a')
+    for (const i of this.users) {
+      if (i.id == this.userId) { 
+        this.user = i;
+      }
+    }
+    
   }
 
   
@@ -73,13 +85,7 @@ export class TarefasComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
-
-    this.pegaDoLocalStorage();
-
-    console.log(this.user)
-
-  }
+ 
 
   pegaDoLocalStorage(): void {
     const listaLocalStoragePropriedade = localStorage.getItem('listaDePropriedade');

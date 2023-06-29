@@ -6,7 +6,7 @@ import { TarefasComponent } from './tarefas/tarefas.component';
 
 const routes: Routes = [
 
-  { path: 'tarefas', component: TarefasComponent, canActivate: [AuthGuardService] },
+  { path: 'tarefas', component: TarefasComponent},
   { path: 'categoria', component: CategoriaComponent }
 ];
 

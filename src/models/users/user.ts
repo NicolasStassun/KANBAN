@@ -1,6 +1,6 @@
 export class User {
     id: string = '';
-	name: string = '';
+	nome: string = '';
 	groups: string[] = [];
 	cardPermissions: string[] = [];
 	propertiesPermissions: string[] = [];
