@@ -31,37 +31,43 @@ export class TarefasComponent implements OnInit {
 
   @Input() userTarefa!: User
 
-  userId: string = 'teste';
-  users: User[] = [];
+  userId: string = '123';
+  listaUsers: User[] = [];
   user!: User;
 
   constructor(
     private userRepository: UserRepository
   ) {
-    this.userRepository.getUsers().subscribe({
-      next:(value)=>{
-         this.users = value
-         console.log(this.users)
-      }
-    })
     
-    console.log(this.user)
   }
 
   ngOnInit(): void {
-    this.getUsuarioLogado();
     this.pegaDoLocalStorage();
-
+    this.pegaDoDb();
+    this.getUsuarioLogado();
   }
 
-
+  pegaDoDb():void{
+    this.userRepository.getUsers().subscribe({
+      next:(users)=>{
+         for (const user of users) {
+            this.listaUsers.push(user)
+         }
+      }
+    })
+  }
   
 
  getUsuarioLogado(): void {
   console.log('a')
-    for (const i of this.users) {
+  console.log(this.listaUsers)
+    for (const i of this.listaUsers) {
       if (i.id == this.userId) { 
         this.user = i;
+        console.log(this.user)
+      }
+      else{
+        console.log("a")
       }
     }
     
