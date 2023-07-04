@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { User } from "src/models/users/user";
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
@@ -8,6 +8,9 @@ const API_URL = 'http://localhost:4300/usuarios'
 
 @Injectable()
 export class UserRepository {
+    API_URL: string = 'http://localhost:4300/usuarios';
+
+
     constructor(
         private httpClient: HttpClient
     ){
@@ -25,4 +28,14 @@ export class UserRepository {
         }))
     }
 
+    public sendUsers(user:User):void{
+        const headers = new HttpHeaders({'myHeader': 'header'})
+        this.httpClient.post(
+        this.API_URL, 
+        user, {headers: headers})
+        .subscribe((res) => {
+        console.log(res);
+    })}
 }
+
+

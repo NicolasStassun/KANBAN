@@ -11,12 +11,16 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { UserRepository } from 'src/repositories/user.repository';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from 'src/services/auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TarefasComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

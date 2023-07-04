@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
 import { User } from 'src/models/users/user';
+
 import { UserRepository } from 'src/repositories/user.repository';
 import { AppComponent } from '../app.component';
 
@@ -28,12 +29,7 @@ interface Tarefa{
 
 
 export class TarefasComponent implements OnInit {
-
-  @Input() userTarefa!: User
-
-  userId: string = '123';
-  listaUsers: User[] = [];
-  user!: User;
+  user: any;
 
   constructor(
     private userRepository: UserRepository
@@ -43,36 +39,8 @@ export class TarefasComponent implements OnInit {
 
   ngOnInit(): void {
     this.pegaDoLocalStorage();
-    this.pegaDoDb();
-    this.getUsuarioLogado();
-  }
-
-  pegaDoDb():void{
-    this.userRepository.getUsers().subscribe({
-      next:(users)=>{
-         for (const user of users) {
-            this.listaUsers.push(user)
-         }
-      }
-    })
   }
   
-
- getUsuarioLogado(): void {
-  console.log('a')
-  console.log(this.listaUsers)
-    for (const i of this.listaUsers) {
-      if (i.id == this.userId) { 
-        this.user = i;
-        console.log(this.user)
-      }
-      else{
-        console.log("a")
-      }
-    }
-    
-  }
-
   
 
   tarefaModelo: Tarefa = {
@@ -88,6 +56,8 @@ export class TarefasComponent implements OnInit {
 
   categoriaDrop: string = '';
   indexDrop: number = 0;
+
+  usuario: User | undefined
 
 
 
@@ -147,7 +117,7 @@ export class TarefasComponent implements OnInit {
   }
 
   hasPermission(permission: string): boolean {
-    return this.user.cardPermissions.some((cardPermission) => {
+    return this.user.cardPermissions.some((cardPermission: string) => {
       return cardPermission === permission;
     });
   }
