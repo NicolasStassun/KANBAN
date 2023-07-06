@@ -17,6 +17,7 @@ export class CategoriaComponent implements OnInit {
 
   item:string = "";
   itemPropriedadeExistente:string = "";
+  
 
   propriedadeModelo: Propriedade = { 
       nome: "",

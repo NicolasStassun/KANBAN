@@ -2,7 +2,6 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
 import { User } from 'src/models/users/user';
-
 import { UserRepository } from 'src/repositories/user.repository';
 import { AppComponent } from '../app.component';
 
@@ -11,13 +10,14 @@ interface Propriedade{
   nome:string,
   tipo: string,
   items?: string[]
+  valor?: string | number
 
 }
 
 interface Tarefa{
 
   nome: string;
-  propriedades: Propriedade[]
+  propriedades: Propriedade[];
 
 }
 
@@ -41,12 +41,15 @@ export class TarefasComponent implements OnInit {
     this.pegaDoLocalStorage();
   }
   
-  
+  propriedadeAux: Propriedade = {
+    nome: '',
+    tipo: '',
+  };
 
   tarefaModelo: Tarefa = {
 
     nome: '',
-    propriedades: [] 
+    propriedades: []
 
   }
 
@@ -59,9 +62,11 @@ export class TarefasComponent implements OnInit {
 
   usuario: User | undefined
 
+  botoesAdd: number[] = [];
 
-
- 
+  addPropriedade() {
+    
+  }
 
   pegaDoLocalStorage(): void {
     const listaLocalStoragePropriedade = localStorage.getItem('listaDePropriedade');
@@ -82,9 +87,9 @@ export class TarefasComponent implements OnInit {
 
   adicionarTarefa(): void {
   
-    if (this.hasPermission('Add')) {
+    // if (this.hasPermission('Add')) {
 
-      alert('Pode cadastrar');
+    alert('Pode cadastrar');
     const novaTarefa: Tarefa = {
       nome: this.tarefaModelo.nome,
       propriedades: this.tarefaModelo.propriedades
@@ -93,34 +98,40 @@ export class TarefasComponent implements OnInit {
     this.enviaTarefasParaLocalStorage();
 
     this.tarefaModelo.nome = '';
-    this.tarefaModelo.propriedades = []
     return;
       
-    }
+    // }
     
   }
 
+  editandoTarefa: boolean = false;
+
   editarTarefa(): void {
-    if (this.hasPermission('Edit')) {
-      alert('Pode cadastrar');
-      return;
-    }
+    // if (this.hasPermission('Edit')) {
+      if(this.editandoTarefa == true){
+        this.editandoTarefa = false
+      }
+      else{
+        this.editandoTarefa = true
+      }
+      
+    // }
     alert('Pode cadastrar');
   }
 
   removerTarefa(indice: number): void {
-    if (this.hasPermission('Remove')) {
+    // if (this.hasPermission('Remove')) {
       this.tarefas.splice(indice,1);
       localStorage.setItem("listaDeTarefas",JSON.stringify(this.tarefas))
-    }
+    // }
     
   }
 
-  hasPermission(permission: string): boolean {
-    return this.user.cardPermissions.some((cardPermission: string) => {
-      return cardPermission === permission;
-    });
-  }
+  // hasPermission(permission: string): boolean {
+  //   return this.user.cardPermissions.some((cardPermission: string) => {
+  //     return cardPermission === permission;
+  //   });
+  // }
 
 
   // dropOver(categoria: string, event: Event):void{

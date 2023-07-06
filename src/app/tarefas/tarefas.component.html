@@ -3,33 +3,42 @@
         <input
             class=" w-full mx-5 mt-1 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-10/12 rounded-md sm:text-sm focus:ring-1"
             placeholder="Nome" [(ngModel)]="tarefaModelo.nome">
-
-        <select class="rounded border-2 border-black" [(ngModel)]="tarefaModelo.propriedades">
-            <option *ngFor="let propriedade of propriedades" [ngValue]="propriedade">{{propriedade.nome}}</option>
-        </select>
-        <button class="break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12"
-            (click)="adicionarTarefa()">cadastrarTarefa</button>
+            <button class="break-words rounded border-2 border-black hover:border-blue-400 bg-white px-8 py-2 text-lg h-12"
+                (click)="adicionarTarefa()">cadastrarTarefa</button>
     </div>
+    
+</div>
 
-    <div class="flex justify-around w-screen flex-wrap">
 
-        <div *ngFor="let tarefa of tarefas;index as index">
+<div class="flex justify-around w-screen flex-wrap">
 
-            <div>
+    <div *ngFor="let tarefa of tarefas;index as index">
 
-                <div id="tarefas">
+        <div>
 
-                    <button style="border:0;align-self:end;background-color: transparent;justify-self: end;"
-                        (click)="removerTarefa(index)">X</button>
-                    <p>
-                        Tarefa: {{ tarefa.nome }}
-                    </p>
-                    <button (click)="editarTarefa()">Editar tarefa</button>
+            <div id="tarefas">
 
+                <button style="border:0;align-self:end;background-color: transparent;justify-self: end;"
+                    (click)="removerTarefa(index)">X</button>
+                <p>
+                    Tarefa: {{ tarefa.nome }}
+                </p>
+                <div *ngFor="let propriedade of tarefa.propriedades">
+                    <input *ngIf="propriedade.nome == 'Number'" type="number">
+                    <input *ngIf="propriedade.nome == 'String'" type="number">
+                </div>
+                <button (click)="editarTarefa()">Editar tarefa</button>
+                <div *ngIf="editandoTarefa">
+                    <div>
+                        <select class="rounded border-2 border-black" [(ngModel)]="tarefaModelo.propriedades">
+                            <option *ngFor="let propriedade of propriedades" [ngValue]="propriedade">{{propriedade.nome}} </option>
+                        </select>
+                        <button>ADD</button>
+                    </div>
                 </div>
 
-
             </div>
+
 
         </div>
     </div>
